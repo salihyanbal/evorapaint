@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Kayıt İçin E-posta Doğrulaması</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+
+    <!-- use the font -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+
+    <p th:text="${'Merhaba ' + firstName + ' ' + lastName}"></p>
+    <p>
+        Evorapaint sipariş sistemine kayıt için e-posta doğrulama kodunuz<br>
+        <em><b th:text="${verificationCode}"></b></em>
+    </p>
+
+    <br>
+    <hr>
+    <p>
+        Bu otomatik bi e-posta'dır, lütfen yanıtlamayınız.
+    </p>
+</body>
+</html>
