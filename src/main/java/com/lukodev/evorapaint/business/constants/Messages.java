@@ -58,17 +58,17 @@ public class Messages {
     public static final String REMITTANCE_INFORMATION_UPDATED = "Havale bilgisi güncellendi.";
     public static final String REMITTANCE_INFORMATION_DELETED = "Havale bilgisi silindi.";
 
-    public static final String SHIPMENT_ADDED = "Sevkiyat eklendi.";
-    public static final String SHIPMENT_UPDATED = "Sevkiyat güncellendi.";
-    public static final String SHIPMENT_DELETED = "Sevkiyat silindi.";
+    public static final String SHIPMENT_ADDED = "Nakliyat eklendi.";
+    public static final String SHIPMENT_UPDATED = "Nakliyat güncellendi.";
+    public static final String SHIPMENT_DELETED = "Nakliyat silindi.";
 
-    public static final String SHIPMENT_METHOD_ADDED = "Sevkiyat yöntemi eklendi.";
-    public static final String SHIPMENT_METHOD_UPDATED = "Sevkiyat yöntemi güncellendi.";
-    public static final String SHIPMENT_METHOD_DELETED = "Sevkiyat yöntemi silindi.";
+    public static final String SHIPMENT_METHOD_ADDED = "Nakliyat yöntemi eklendi.";
+    public static final String SHIPMENT_METHOD_UPDATED = "Nakliyat yöntemi güncellendi.";
+    public static final String SHIPMENT_METHOD_DELETED = "Nakliyat yöntemi silindi.";
 
-    public static final String SHIPMENT_TYPE_ADDED = "Sevkiyat tipi eklendi.";
-    public static final String SHIPMENT_TYPE_UPDATED = "Sevkiyat tipi güncellendi.";
-    public static final String SHIPMENT_TYPE_DELETED = "Sevkiyat tipi silindi.";
+    public static final String SHIPMENT_TYPE_ADDED = "Nakliyat tipi eklendi.";
+    public static final String SHIPMENT_TYPE_UPDATED = "Nakliyat tipi güncellendi.";
+    public static final String SHIPMENT_TYPE_DELETED = "Nakliyat tipi silindi.";
 
     public static final String USER_ADDED = "Kullanıcı eklendi.";
     public static final String USER_UPDATED = "Kullanıcı güncellendi.";

@@ -1,5 +1,6 @@
 package com.lukodev.evorapaint.business.concretes;
 
+import com.lukodev.evorapaint.business.abstracts.UserService;
 import com.lukodev.evorapaint.business.abstracts.UserVerificationByMailService;
 import com.lukodev.evorapaint.business.constants.Messages;
 import com.lukodev.evorapaint.core.services.automaticMail.AutomaticMailService;
@@ -23,12 +24,14 @@ import java.util.List;
 public class UserVerificationByMailManager implements UserVerificationByMailService {
 
     private UserVerificationByMailDao userVerificationByMailDao;
+    private UserService userService;
     private AutomaticMailService automaticMailService;
     private int expirationInMinutes = 10;
 
     @Autowired
-    public UserVerificationByMailManager(UserVerificationByMailDao userVerificationByMailDao, AutomaticMailService automaticMailService) {
+    public UserVerificationByMailManager(UserVerificationByMailDao userVerificationByMailDao, UserService userService, AutomaticMailService automaticMailService) {
         this.userVerificationByMailDao = userVerificationByMailDao;
+        this.userService = userService;
         this.automaticMailService = automaticMailService;
     }
 
@@ -36,6 +39,9 @@ public class UserVerificationByMailManager implements UserVerificationByMailServ
     @Transactional
     @CacheEvict(value = "userVerificationByMail.getAll", allEntries = true)
     public Result add(UserVerificationByMail userVerificationByMail) {
+        if(userVerificationByMail.getUser().getEmail() == null){
+            userVerificationByMail.setUser(this.userService.getById(userVerificationByMail.getUser().getId()).getData());
+        }
         DataResult<Integer> sendResult = this.automaticMailService.sendVerificationMail(userVerificationByMail.getUser());
         userVerificationByMail.setVerificationCode(sendResult.getData());
         userVerificationByMail.setExpiration(LocalDateTime.now().plusMinutes(expirationInMinutes));
@@ -47,6 +53,9 @@ public class UserVerificationByMailManager implements UserVerificationByMailServ
     @Transactional
     @CacheEvict(value = "userVerificationByMail.getAll", allEntries = true)
     public Result update(UserVerificationByMail userVerificationByMail) {
+        if(userVerificationByMail.getUser().getEmail() == null){
+            userVerificationByMail.setUser(this.userService.getById(userVerificationByMail.getUser().getId()).getData());
+        }
         DataResult<Integer> sendResult = this.automaticMailService.sendVerificationMail(userVerificationByMail.getUser());
         userVerificationByMail.setVerificationCode(sendResult.getData());
         userVerificationByMail.setExpiration(LocalDateTime.now().plusMinutes(expirationInMinutes));

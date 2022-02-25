@@ -24,7 +24,7 @@ public class Product {
     private int id;
 
     @Column(name = "name")
-    @Min(value = 3, message = "Ürün adı en az 3 harften oluşmalıdır.")
+    @Min(value = 2, message = "Ürün adı en az 3 harften oluşmalıdır.")
     @Max(value = 50, message = "Ürün adı en fazla 50 harften oluşmalıdır.")
     private String name;
 

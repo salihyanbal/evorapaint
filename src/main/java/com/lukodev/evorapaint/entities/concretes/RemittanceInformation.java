@@ -35,7 +35,7 @@ public class RemittanceInformation {
     @Column(name = "iban")
     @NotNull(message = "IBAN boş bırakılamaz.")
     @NotBlank(message = "IBAN sadece sadece boşluktan oluşamaz.")
-    @Min(value = 15, message = "IBAN en az 15 karakterden oluşmalıdır.")
+    @Min(value = 10, message = "IBAN en az 15 karakterden oluşmalıdır.")
     @Max(value = 40, message = "IBAN en fazla 40 karakterden oluşmalıdır.")
     private String iban;
 

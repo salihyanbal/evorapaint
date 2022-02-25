@@ -26,7 +26,7 @@ public class ShipmentType {
     @Column(name = "name")
     @NotNull(message = "Nakliyat tipi adı boş bırakılamaz.")
     @NotBlank(message = "Nakliyat tipi adı sadece boşluktan oluşamaz.")
-    @Max(value = 40, message = "Nakliyat tipi adı en fazla 40 harften oluşabilir.")
+    @Max(value = 50, message = "Nakliyat tipi adı en fazla 50 harften oluşabilir.")
     private String name;
 
     @OneToMany(mappedBy = "shipmentType")

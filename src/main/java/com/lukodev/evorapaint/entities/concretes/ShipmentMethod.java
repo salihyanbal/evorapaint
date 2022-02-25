@@ -25,18 +25,18 @@ public class ShipmentMethod {
     private int id;
 
     @Column(name = "name")
-    @NotNull(message = "Sevkiyat yöntemi adı boş bırakılamaz.")
-    @NotBlank(message = "Sevkiyat yöntemi adı sadece boşluktan oluşamaz.")
+    @NotNull(message = "Nakliyat yöntemi adı boş bırakılamaz.")
+    @NotBlank(message = "Nakliyat yöntemi adı sadece boşluktan oluşamaz.")
     private String name;
 
     @Column(name = "company")
-    @NotNull(message = "Sevkiyat şirketi boş bırakılamaz.")
-    @NotBlank(message = "Sevkiyat şirketi sadece boşluktan oluşamaz.")
+    @NotNull(message = "Nakliyat şirketi boş bırakılamaz.")
+    @NotBlank(message = "Nakliyat şirketi sadece boşluktan oluşamaz.")
     private String company;
 
     @Column(name = "shipping_cost")
-    @Min(value = 0, message = "Sevkiyat maliyeti(ücreti) 0'dan küçük olamaz.")
-    @Max(value = 1000000, message = "Sevkiyat maliyeti(ücreti) 1.000.000'dan büyük olamaz.")
+    @Min(value = 0, message = "Nakliyat maliyeti(ücreti) 0'dan küçük olamaz.")
+    @Max(value = 1000000, message = "Nakliyat maliyeti(ücreti) 1.000.000'dan büyük olamaz.")
     private double shippingCost;
 
     @Column(name = "company_web_address")

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/employeeroles")
+@RequestMapping("/api/userroles")
 @CrossOrigin
 public class UserRolesController {
 

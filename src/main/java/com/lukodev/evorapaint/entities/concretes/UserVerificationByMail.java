@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @Entity
@@ -32,7 +33,7 @@ public class UserVerificationByMail {
 
     @Column(name = "expiration")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime expiration;
 
     @OneToOne()

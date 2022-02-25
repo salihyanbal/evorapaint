@@ -20,11 +20,11 @@ public class Shipment {
     private int id;
 
     @Column(name = "tracking_code")
-    @Max(value = 120, message = "Kargo takip numarası en fazla 120 karakterden oluşabilir.")
+    @Max(value = 120, message = "Nakliyat takip numarası en fazla 120 karakterden oluşabilir.")
     private String trackingCode;
 
     @Column(name = "tracking_link")
-    @Max(value = 500, message = "Kargo takip linki en fazla 500 karakterden oluşabilir.")
+    @Max(value = 500, message = "Nakliyat takip linki en fazla 500 karakterden oluşabilir.")
     private String trackingLink;
 
     @OneToOne()
