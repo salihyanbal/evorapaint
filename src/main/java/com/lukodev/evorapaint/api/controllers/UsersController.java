@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class UsersController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody User user){
+    public ResponseEntity<?> add(@Valid @RequestBody User user){
         return ResponseEntity.ok(this.userService.add(user));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody User user){
+    public ResponseEntity<?> update(@Valid @RequestBody User user){
         return ResponseEntity.ok(this.userService.update(user));
     }
 

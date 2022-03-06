@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Random;
 
 @RestController
@@ -24,12 +25,12 @@ public class UserVerificationByMailsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody UserVerificationByMail userVerificationByMail){
+    public ResponseEntity<?> add(@Valid @RequestBody UserVerificationByMail userVerificationByMail){
         return ResponseEntity.ok(this.userVerificationByMailService.add(userVerificationByMail));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody UserVerificationByMail userVerificationByMail){
+    public ResponseEntity<?> update(@Valid @RequestBody UserVerificationByMail userVerificationByMail){
         return ResponseEntity.ok(this.userVerificationByMailService.update(userVerificationByMail));
     }
 

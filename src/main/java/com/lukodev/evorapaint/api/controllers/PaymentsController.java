@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/payments")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class PaymentsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Payment payment){
+    public ResponseEntity<?> add(@Valid @RequestBody Payment payment){
         return ResponseEntity.ok(this.paymentService.add(payment));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Payment payment){
+    public ResponseEntity<?> update(@Valid @RequestBody Payment payment){
         return ResponseEntity.ok(this.paymentService.update(payment));
     }
 
@@ -41,6 +43,11 @@ public class PaymentsController {
     @GetMapping("/getallbyorderid")
     public ResponseEntity<?> getAllByOrderId(@RequestParam int orderId){
         return ResponseEntity.ok(this.paymentService.getAllByOrderId(orderId));
+    }
+
+    @GetMapping("/getallbycustomerid")
+    public ResponseEntity<?> getAllByCustomerId(@RequestParam int customerId){
+        return ResponseEntity.ok(this.paymentService.getAllByCustomerId(customerId));
     }
 
     @GetMapping("/getbyid")

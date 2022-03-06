@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/addresses")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class AddressesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Address address){
+    public ResponseEntity<?> add(@Valid @RequestBody Address address){
         return ResponseEntity.ok(this.addressService.add(address));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Address address){
+    public ResponseEntity<?> update(@Valid @RequestBody Address address){
         return ResponseEntity.ok(this.addressService.update(address));
     }
 
@@ -41,6 +43,11 @@ public class AddressesController {
     @GetMapping("/getallbycustomerid")
     public ResponseEntity<?> getAllByCustomerId(@RequestParam int customerId){
         return ResponseEntity.ok(this.addressService.getAllByCustomerId(customerId));
+    }
+
+    @GetMapping("/getallbycustomeridanddeletedfalse")
+    public ResponseEntity<?> getAllByCustomerIdAndDeletedFalse(@RequestParam int customerId){
+        return ResponseEntity.ok(this.addressService.getAllByCustomerIdAndDeletedFalse(customerId));
     }
 
 

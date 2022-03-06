@@ -33,15 +33,15 @@ public class User {
     private String password;
 
     @Column(name = "first_name")
-    @Min(value = 2, message = "İsim alanı en az 2 harften oluşmalıdır.")
-    @Max(value = 40, message = "İsim alanı en fazla 40 harften oluşmalıdır.")
+    @Size(min = 2, message = "İsim alanı en az 2 harften oluşmalıdır.")
+    @Size(max = 40, message = "İsim alanı en fazla 40 harften oluşmalıdır.")
     @NotNull(message = "İsim boş bırakılamaz.")
     @NotBlank(message = "İsim sadece boşluktan oluşamaz.")
     private String firstName;
 
     @Column(name = "last_name")
-    @Min(value = 2, message = "Soyisim alanı en az 2 harften oluşmalıdır.")
-    @Max(value = 40, message = "Soyisim alanı en fazla 40 harften oluşmalıdır.")
+    @Size(min = 2, message = "Soyisim alanı en az 2 harften oluşmalıdır.")
+    @Size(max = 40, message = "Soyisim alanı en fazla 40 harften oluşmalıdır.")
     @NotNull(message = "Soyisim boş bırakılamaz.")
     @NotBlank(message = "Soyisim sadece boşluktan oluşamaz.")
     private String lastName;

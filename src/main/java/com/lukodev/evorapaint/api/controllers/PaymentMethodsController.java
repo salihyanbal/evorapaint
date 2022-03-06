@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/paymentmethods")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class PaymentMethodsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody PaymentMethod paymentMethod){
+    public ResponseEntity<?> add(@Valid @RequestBody PaymentMethod paymentMethod){
         return ResponseEntity.ok(this.paymentMethodService.add(paymentMethod));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody PaymentMethod paymentMethod){
+    public ResponseEntity<?> update(@Valid @RequestBody PaymentMethod paymentMethod){
         return ResponseEntity.ok(this.paymentMethodService.update(paymentMethod));
     }
 

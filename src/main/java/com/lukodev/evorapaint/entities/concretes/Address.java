@@ -47,6 +47,9 @@ public class Address {
     @NotBlank(message = "İletişim numarası boşluktan oluşamaz.")
     private String contactNumber;
 
+    @Column(name = "deleted")
+    private boolean deleted;
+
     @ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;

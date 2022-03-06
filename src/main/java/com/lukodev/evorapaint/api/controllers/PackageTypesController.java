@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/packagetypes")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class PackageTypesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody PackageType packageType){
+    public ResponseEntity<?> add(@Valid @RequestBody PackageType packageType){
         return ResponseEntity.ok(this.packageTypeService.add(packageType));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody PackageType packageType){
+    public ResponseEntity<?> update(@Valid @RequestBody PackageType packageType){
         return ResponseEntity.ok(this.packageTypeService.update(packageType));
     }
 

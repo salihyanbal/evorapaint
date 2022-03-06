@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -20,18 +21,18 @@ public class Shipment {
     private int id;
 
     @Column(name = "tracking_code")
-    @Max(value = 120, message = "Nakliyat takip numarası en fazla 120 karakterden oluşabilir.")
+    @Size(max = 120, message = "Nakliyat takip numarası en fazla 120 karakterden oluşabilir.")
     private String trackingCode;
 
     @Column(name = "tracking_link")
-    @Max(value = 500, message = "Nakliyat takip linki en fazla 500 karakterden oluşabilir.")
+    @Size(max = 500, message = "Nakliyat takip linki en fazla 500 karakterden oluşabilir.")
     private String trackingLink;
 
     @OneToOne()
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", unique = true)
     private Order order;
 
     @OneToOne()
-    @JoinColumn(name = "shipment_method_id")
+    @JoinColumn(name = "shipment_method_id", unique = true)
     private ShipmentMethod shipmentMethod;
 }

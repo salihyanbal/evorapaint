@@ -6,9 +6,7 @@ import com.lukodev.evorapaint.core.utilities.results.*;
 import com.lukodev.evorapaint.core.utilities.security.jwt.TokenHelper;
 import com.lukodev.evorapaint.core.utilities.security.models.TokenModel;
 import com.lukodev.evorapaint.entities.concretes.*;
-import com.lukodev.evorapaint.entities.dtos.CustomerForRegisterDto;
-import com.lukodev.evorapaint.entities.dtos.EmployeeForRegisterDto;
-import com.lukodev.evorapaint.entities.dtos.UserForLoginDto;
+import com.lukodev.evorapaint.entities.dtos.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -74,9 +72,36 @@ public class AuthManager implements AuthService {
         }
         boolean isMatch = passwordEncoder.matches(userForLoginDto.getPassword(), user.getPassword());
         if(!isMatch){
-            return new ErrorDataResult<>("Şifreler eşleşmiyor.");
+            return new ErrorDataResult<>("Şifrenizi eksik veya hatalı girdiniz.");
+        }
+        if(!user.isActive()){
+            return new ErrorDataResult<>("Kullanıcı hesabı askıya alınmış.");
         }
         return new SuccessDataResult<>(user, "Giriş başarılı.");
+    }
+
+    @Override
+    @Transactional
+    public Result changeEmail(ChangeEmailDto changeEmailDto) {
+        User user = userService.getByEmail(changeEmailDto.getUser().getEmail()).getData();
+        user.setEmail(changeEmailDto.getNewEmail());
+        this.userVerificationByMailService.sendVerificationMail(user);
+        this.userService.update(user);
+        return new SuccessResult("Emailiniz güncellendi, lütfen emailinizi doğrulayınız.");
+    }
+
+    @Override
+    @Transactional
+    public Result changePassword(ChangePasswordDto changePasswordDto) {
+        User oldUser = userService.getByEmail(changePasswordDto.getUser().getEmail()).getData();
+        boolean isMatch = passwordEncoder.matches(changePasswordDto.getOldPassword(), oldUser.getPassword());
+        if(!isMatch){
+            return new ErrorDataResult<>("Eski şifrenizi eksik veya hatalı girdiniz.");
+        }
+        String encodedPassword = passwordEncoder.encode(changePasswordDto.getNewPassword());
+        oldUser.setPassword(encodedPassword);
+        this.userService.update(oldUser);
+        return new SuccessResult("Parolanız başarıyla güncellendi.");
     }
 
     @Override

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -26,7 +27,7 @@ public class ShipmentType {
     @Column(name = "name")
     @NotNull(message = "Nakliyat tipi adı boş bırakılamaz.")
     @NotBlank(message = "Nakliyat tipi adı sadece boşluktan oluşamaz.")
-    @Max(value = 50, message = "Nakliyat tipi adı en fazla 50 harften oluşabilir.")
+    @Size(max = 50, message = "Nakliyat tipi adı en fazla 50 harften oluşabilir.")
     private String name;
 
     @OneToMany(mappedBy = "shipmentType")

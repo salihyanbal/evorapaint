@@ -18,12 +18,9 @@ import java.util.List;
 public class Customer extends User{
 
     @Column(name = "phone_number")
-    @Digits(integer = 20, fraction = 0)
     private String phoneNumber;
 
     @Column(name = "main_country")
-    @NotNull(message = "Yaşanan ülke boş bırakılamaz.")
-    @NotBlank(message = "Yaşanan ülke sadece boşluktan oluşamaz.")
     private String mainCountry;
 
     @OneToMany(mappedBy = "customer")
@@ -33,4 +30,8 @@ public class Customer extends User{
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
     private List<Order> orders;
+
+    @OneToOne(mappedBy = "customer")
+    @JsonIgnore
+    private ShoppingCart shoppingCart;
 }

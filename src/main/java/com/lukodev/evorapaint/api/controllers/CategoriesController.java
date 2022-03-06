@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/categories")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class CategoriesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Category category){
+    public ResponseEntity<?> add(@Valid @RequestBody Category category){
         return ResponseEntity.ok(this.categoryService.add(category));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Category category){
+    public ResponseEntity<?> update(@Valid @RequestBody Category category){
         return ResponseEntity.ok(this.categoryService.update(category));
     }
 
@@ -36,6 +38,11 @@ public class CategoriesController {
     @GetMapping("/getall")
     public ResponseEntity<?> getAll(){
         return ResponseEntity.ok(this.categoryService.getAll());
+    }
+
+    @GetMapping("/getallactive")
+    public ResponseEntity<?> getAllActive(){
+        return ResponseEntity.ok(this.categoryService.getAllActive());
     }
 
     @GetMapping("/getbyid")

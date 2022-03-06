@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -25,8 +27,8 @@ public class Category {
 
     @Column(name = "name")
     @NotNull(message = "Kategori adı boş bırakılamaz.")
-    @Min(value = 3, message = "Kategori adı en az 3 harften oluşmalıdır.")
-    @Max(value = 30, message = "Kategori adı en fazla 30 harften oluşmalıdır")
+    @Size(min = 2, message = "Kategori adı en az 2 harften oluşmalıdır.")
+    @Size(max = 30, message = "Kategori adı en fazla 30 harften oluşmalıdır")
     private String name;
 
     @Column(name = "active")

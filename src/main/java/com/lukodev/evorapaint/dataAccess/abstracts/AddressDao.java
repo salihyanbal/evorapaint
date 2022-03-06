@@ -9,4 +9,6 @@ public interface AddressDao extends JpaRepository<Address, Integer> {
 
     List<Address> getAllByCustomerId(int customerId);
 
+    List<Address> getAllByCustomerIdAndDeletedFalse(int customerId);
+
 }

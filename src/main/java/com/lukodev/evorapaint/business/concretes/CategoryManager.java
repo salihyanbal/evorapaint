@@ -54,6 +54,11 @@ public class CategoryManager implements CategoryService {
     }
 
     @Override
+    public DataResult<List<Category>> getAllActive() {
+        return new SuccessDataResult<>(this.categoryDao.getAllByActiveTrue());
+    }
+
+    @Override
     public DataResult<Category> getById(int id) {
         return new SuccessDataResult<>(this.categoryDao.findById(id).get());
     }

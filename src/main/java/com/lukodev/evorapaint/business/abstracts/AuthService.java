@@ -6,9 +6,7 @@ import com.lukodev.evorapaint.core.utilities.security.models.TokenModel;
 import com.lukodev.evorapaint.entities.concretes.Customer;
 import com.lukodev.evorapaint.entities.concretes.Employee;
 import com.lukodev.evorapaint.entities.concretes.User;
-import com.lukodev.evorapaint.entities.dtos.CustomerForRegisterDto;
-import com.lukodev.evorapaint.entities.dtos.EmployeeForRegisterDto;
-import com.lukodev.evorapaint.entities.dtos.UserForLoginDto;
+import com.lukodev.evorapaint.entities.dtos.*;
 
 public interface AuthService {
 
@@ -17,6 +15,10 @@ public interface AuthService {
     DataResult<Customer> registerForCustomer(CustomerForRegisterDto customerForRegisterDto);
 
     DataResult<User> login(UserForLoginDto userForLoginDto);
+
+    Result changeEmail(ChangeEmailDto changeEmailDto);
+
+    Result changePassword(ChangePasswordDto changePasswordDto);
 
     Result userExist(String email);
 

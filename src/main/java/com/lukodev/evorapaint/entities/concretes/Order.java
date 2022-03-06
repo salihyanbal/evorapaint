@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,9 +28,10 @@ public class Order {
     @Column(name = "date")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     @NotNull(message = "Sipariş tarihi boş bırakılamaz.")
-    private Date date;
+    private LocalDateTime date;
 
     @Column(name = "estimated_delivery_date")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate estimatedDeliveryDate;
 
     @ManyToOne()

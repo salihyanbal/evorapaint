@@ -80,9 +80,19 @@ public class UserVerificationByMailManager implements UserVerificationByMailServ
 
     @Override
     public Result sendVerificationMail(User user){
-        UserVerificationByMail userVerificationByMail = new UserVerificationByMail(0,0,false,LocalDateTime.now().plusMinutes(10),user);
+        UserVerificationByMail userVerificationByMail;
+        if(isExistByUserId(user.getId())){
+            userVerificationByMail = this.getByUserId(user.getId()).getData();
+            userVerificationByMail.setVerified(false);
+        }else{
+            userVerificationByMail = new UserVerificationByMail(0,0,false,LocalDateTime.now().plusMinutes(10),user);
+        }
         add(userVerificationByMail);
         return new SuccessResult("Onay maili gönderildi.");
+    }
+
+    private boolean isExistByUserId(int userId){
+        return this.userVerificationByMailDao.existsByUserId(userId);
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_verification_by_mail")
+@Table(name = "user_verifications_by_mail")
 public class UserVerificationByMail {
 
     @Id

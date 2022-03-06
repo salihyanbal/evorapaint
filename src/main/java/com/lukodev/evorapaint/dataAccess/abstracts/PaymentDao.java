@@ -8,4 +8,6 @@ import java.util.List;
 public interface PaymentDao extends JpaRepository<Payment, Integer> {
 
     List<Payment> getAllByOrderId(int orderId);
+
+    List<Payment> getAllByOrder_CustomerId(int customerId);
 }

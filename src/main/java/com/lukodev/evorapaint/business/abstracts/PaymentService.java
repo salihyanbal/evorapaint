@@ -14,6 +14,7 @@ public interface PaymentService {
 
     DataResult<List<Payment>> getAll();
     DataResult<List<Payment>> getAllByOrderId(int orderId);
+    DataResult<List<Payment>> getAllByCustomerId(int customerId);
 
     DataResult<Payment> getById(int id);
 

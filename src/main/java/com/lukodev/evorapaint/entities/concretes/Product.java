@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -24,8 +25,8 @@ public class Product {
     private int id;
 
     @Column(name = "name")
-    @Min(value = 2, message = "Ürün adı en az 3 harften oluşmalıdır.")
-    @Max(value = 50, message = "Ürün adı en fazla 50 harften oluşmalıdır.")
+    @Size(min = 2, message = "Ürün adı en az 2 harften oluşmalıdır.")
+    @Size(max = 50, message = "Ürün adı en fazla 50 harften oluşmalıdır.")
     private String name;
 
     @Column(name = "weight")
@@ -51,6 +52,11 @@ public class Product {
     @Max(value = 10000000, message = "Stoktaki ürün miktarı 10.000.000'dan büyük olamaz.")
     private int unitsInStock;
 
+    @Column(name = "description")
+    @NotNull(message = "Ürün açıklaması boş bırakılamaz.")
+    @Size(max = 400, message = "Ürün açıklaması en fazla 400 harften oluşmalıdır.")
+    private String description;
+
     @Column(name = "active")
     private boolean active;
 
@@ -61,4 +67,12 @@ public class Product {
     @OneToMany(mappedBy = "product")
     @JsonIgnore
     private List<OrderProduct> orderProducts;
+
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private List<ShoppingCartItem> shoppingCarts;
+
+    @OneToOne(mappedBy = "product")
+    @JsonIgnore
+    private ProductImage productImage;
 }

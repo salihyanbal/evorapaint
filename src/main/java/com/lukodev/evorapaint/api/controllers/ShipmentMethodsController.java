@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/shipmentmethods")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class ShipmentMethodsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody ShipmentMethod shipmentMethod){
+    public ResponseEntity<?> add(@Valid @RequestBody ShipmentMethod shipmentMethod){
         return ResponseEntity.ok(this.shipmentMethodService.add(shipmentMethod));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody ShipmentMethod shipmentMethod){
+    public ResponseEntity<?> update(@Valid @RequestBody ShipmentMethod shipmentMethod){
         return ResponseEntity.ok(this.shipmentMethodService.update(shipmentMethod));
     }
 

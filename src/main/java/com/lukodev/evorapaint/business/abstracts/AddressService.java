@@ -14,7 +14,7 @@ public interface AddressService {
 
     DataResult<List<Address>> getAll();
     DataResult<List<Address>> getAllByCustomerId(int customerId);
-
+    DataResult<List<Address>> getAllByCustomerIdAndDeletedFalse(int customerId);
     DataResult<List<Address>> getAllByPageNumber(int pageNumber);
 
     DataResult<Address> getById(int id);

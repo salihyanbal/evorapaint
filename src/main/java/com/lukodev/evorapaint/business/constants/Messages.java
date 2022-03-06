@@ -31,6 +31,7 @@ public class Messages {
     public static final String ORDER_DELETED = "Sipariş silindi.";
 
     public static final String ORDER_PRODUCT_ADDED = "Siparişe ürün eklendi.";
+    public static final String ORDER_PRODUCTS_ADDED = "Siparişe ürünler eklendi.";
     public static final String ORDER_PRODUCT_UPDATED = "Sipariş ürünü güncellendi.";
     public static final String ORDER_PRODUCT_DELETED = "Sipariş ürünü silindi.";
 
@@ -52,7 +53,13 @@ public class Messages {
 
     public static final String PRODUCT_ADDED = "Ürün eklendi.";
     public static final String PRODUCT_UPDATED = "Ürün güncellendi.";
+    public static final String PRODUCTS_UPDATED = "Ürünler güncellendi.";
     public static final String PRODUCT_DELETED = "Ürün silindi.";
+    public static final String PRODUCT_HAS_NO_STOCK = "Stokta ürün bulunamadı.";
+
+    public static final String PRODUCT_IMAGE_ADDED = "Ürün resmi eklendi.";
+    public static final String PRODUCT_IMAGE_UPDATED = "Ürün resmi güncellendi.";
+    public static final String PRODUCT_IMAGE_DELETED = "Ürün resmi silindi.";
 
     public static final String REMITTANCE_INFORMATION_ADDED = "Havale bilgisi eklendi.";
     public static final String REMITTANCE_INFORMATION_UPDATED = "Havale bilgisi güncellendi.";
@@ -69,6 +76,15 @@ public class Messages {
     public static final String SHIPMENT_TYPE_ADDED = "Nakliyat tipi eklendi.";
     public static final String SHIPMENT_TYPE_UPDATED = "Nakliyat tipi güncellendi.";
     public static final String SHIPMENT_TYPE_DELETED = "Nakliyat tipi silindi.";
+
+    public static final String SHOPPING_CART_ADDED = "Alışveriş sepeti eklendi.";
+    public static final String SHOPPING_CART_UPDATED = "Alışveriş sepeti güncellendi.";
+    public static final String SHOPPING_CART_DELETED = "Alışveriş sepeti silindi.";
+
+    public static final String SHOPPING_CART_ITEM_ADDED = "Ürün sepete eklendi.";
+    public static final String SHOPPING_CART_ITEM_UPDATED = "Sepetteki ürün güncellendi.";
+    public static final String SHOPPING_CART_ITEM_DELETED = "Sepetteki ürün silindi.";
+    public static final String SHOPPING_CART_ITEMS_DELETED = "Sepetteki ürünler silindi.";
 
     public static final String USER_ADDED = "Kullanıcı eklendi.";
     public static final String USER_UPDATED = "Kullanıcı güncellendi.";

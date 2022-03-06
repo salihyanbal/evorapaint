@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Data
 @Entity
@@ -35,21 +32,21 @@ public class RemittanceInformation {
     @Column(name = "iban")
     @NotNull(message = "IBAN boş bırakılamaz.")
     @NotBlank(message = "IBAN sadece sadece boşluktan oluşamaz.")
-    @Min(value = 10, message = "IBAN en az 15 karakterden oluşmalıdır.")
-    @Max(value = 40, message = "IBAN en fazla 40 karakterden oluşmalıdır.")
+    @Size(min = 10, message = "IBAN en az 15 karakterden oluşmalıdır.")
+    @Size(max = 40, message = "IBAN en fazla 40 karakterden oluşmalıdır.")
     private String iban;
 
     @Column(name = "account_number")
     @NotNull(message = "Hesap numarası boş bırakılamaz.")
     @NotBlank(message = "Hesap numarası sadece boşluktan oluşamaz.")
-    @Min(value = 2, message = "Hesap numarası en az 2 karakterden oluşmalıdır.")
-    @Max(value = 30, message = "Hesap numarası en fazla 30 karakterden oluşmalıdır.")
+    @Size(min = 2, message = "Hesap numarası en az 2 karakterden oluşmalıdır.")
+    @Size(max = 30, message = "Hesap numarası en fazla 30 karakterden oluşmalıdır.")
     private String accountNumber;
 
     @Column(name = "account_type")
     @NotNull(message = "Hesap türü boş bırakılamaz.")
     @NotBlank(message = "Hesap türü sadece boşluktan oluşamaz.")
-    @Max(value = 20, message = "Hesap türü en fazla 20 karakterden oluşmalıdır.")
+    @Size(max = 20, message = "Hesap türü en fazla 20 karakterden oluşmalıdır.")
     private String accountType;
 
     @ManyToOne()

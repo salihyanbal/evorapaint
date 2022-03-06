@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/remittanceinformations")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class RemittanceInformationsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody RemittanceInformation remittanceInformation){
+    public ResponseEntity<?> add(@Valid @RequestBody RemittanceInformation remittanceInformation){
         return ResponseEntity.ok(this.remittanceInformationService.add(remittanceInformation));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody RemittanceInformation remittanceInformation){
+    public ResponseEntity<?> update(@Valid @RequestBody RemittanceInformation remittanceInformation){
         return ResponseEntity.ok(this.remittanceInformationService.update(remittanceInformation));
     }
 

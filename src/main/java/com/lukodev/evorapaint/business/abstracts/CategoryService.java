@@ -13,5 +13,6 @@ public interface CategoryService {
     Result delete(Category category);
 
     DataResult<List<Category>> getAll();
+    DataResult<List<Category>> getAllActive();
     DataResult<Category> getById(int id);
 }

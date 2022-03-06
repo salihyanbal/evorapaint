@@ -60,6 +60,11 @@ public class AddressManager implements AddressService {
     }
 
     @Override
+    public DataResult<List<Address>> getAllByCustomerIdAndDeletedFalse(int customerId) {
+        return new SuccessDataResult<>(this.addressDao.getAllByCustomerIdAndDeletedFalse(customerId));
+    }
+
+    @Override
     public DataResult<List<Address>> getAllByPageNumber(int pageNumber) {
         Pageable page = PageRequest.of(pageNumber-1,10);
         return new SuccessDataResult<>(this.addressDao.findAll(page).toList());

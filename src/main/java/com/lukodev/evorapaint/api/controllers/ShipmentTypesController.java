@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/shipmenttypes")
 @CrossOrigin
@@ -20,12 +22,12 @@ public class ShipmentTypesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody ShipmentType shipmentType){
+    public ResponseEntity<?> add(@Valid @RequestBody ShipmentType shipmentType){
         return ResponseEntity.ok(this.shipmentTypeService.add(shipmentType));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody ShipmentType shipmentType){
+    public ResponseEntity<?> update(@Valid @RequestBody ShipmentType shipmentType){
         return ResponseEntity.ok(this.shipmentTypeService.update(shipmentType));
     }
 

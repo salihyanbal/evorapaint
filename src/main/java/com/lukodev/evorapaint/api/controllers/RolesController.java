@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/roles")
 @CrossOrigin
@@ -19,12 +21,12 @@ public class RolesController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Role role){
+    public ResponseEntity<?> add(@Valid @RequestBody Role role){
         return ResponseEntity.ok(this.roleService.add(role));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Role role){
+    public ResponseEntity<?> update(@Valid @RequestBody Role role){
         return ResponseEntity.ok(this.roleService.update(role));
     }
 

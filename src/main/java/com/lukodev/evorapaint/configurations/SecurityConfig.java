@@ -1,5 +1,6 @@
 package com.lukodev.evorapaint.configurations;
 
+import com.lukodev.evorapaint.core.exceptionHandling.RestExceptionHandler;
 import com.lukodev.evorapaint.core.utilities.security.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,11 +21,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsService userDetailsService;
     private JwtRequestFilter jwtRequestFilter;
+    private RestExceptionHandler restExceptionHandler;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService, JwtRequestFilter jwtRequestFilter) {
+    public SecurityConfig(UserDetailsService userDetailsService, JwtRequestFilter jwtRequestFilter, RestExceptionHandler restExceptionHandler) {
         this.userDetailsService = userDetailsService;
         this.jwtRequestFilter = jwtRequestFilter;
+        this.restExceptionHandler = restExceptionHandler;
     }
 
     @Override
@@ -43,10 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         categoriesAuthorizations(http);
         customersAuthorizations(http);
         employeesAuthorizations(http);
+        orderAuthorizations(http);
         orderStatusesAuthorizations(http);
         packageTypesAuthorizations(http);
         paymentMethodsAuthorizations(http);
         productsAuthorizations(http);
+        productImagesAuthorizations(http);
         remittanceInformationsAuthorizations(http);
         rolesAuthorizations(http);
         shipmentsAuthorizations(http);
@@ -79,6 +84,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/employees/delete").hasAuthority("admin");
     }
 
+    private void orderAuthorizations(HttpSecurity httpSecurity) throws Exception{
+        httpSecurity.authorizeRequests()
+                .antMatchers("/api/orderstatuses/getall").hasAuthority("admin");
+    }
+
     private void orderStatusesAuthorizations(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeRequests()
                 .antMatchers("/api/orderstatuses/add").hasAuthority("admin")
@@ -105,6 +115,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/products/add").hasAuthority("admin")
                 .antMatchers("/api/products/update").hasAuthority("admin")
                 .antMatchers("/api/products/delete").hasAuthority("admin");
+    }
+
+    private void productImagesAuthorizations(HttpSecurity httpSecurity) throws Exception{
+        httpSecurity.authorizeRequests()
+                .antMatchers("/api/productimages/add").hasAuthority("admin")
+                .antMatchers("/api/productimages/update").hasAuthority("admin")
+                .antMatchers("/api/productimages/delete").hasAuthority("admin");
     }
 
     private void remittanceInformationsAuthorizations(HttpSecurity httpSecurity) throws Exception{
