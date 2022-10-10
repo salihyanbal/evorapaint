@@ -16,7 +16,7 @@ public interface OrderService {
     Result update(Order order);
     Result delete(Order order);
 
-    Result shoppingCartToOrderByShoppingCartId(int shoppingCartId, ShipmentMethod shipmentMethod, Address address);
+    Result shoppingCartToOrderByShoppingCartId(int shoppingCartId, ShipmentMethod shipmentMethod, Address address, boolean belongingToCompany);
 
     DataResult<List<Order>> getAll();
     DataResult<List<Order>> getAllByCustomerId(int customerId);

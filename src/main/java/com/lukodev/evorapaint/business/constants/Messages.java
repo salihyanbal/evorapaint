@@ -10,6 +10,10 @@ public class Messages {
     public static final String CATEGORY_UPDATED = "Kategori güncellendi.";
     public static final String CATEGORY_DELETED = "Kategori silindi.";
 
+    public static final String COMPANY_ADDED = "Şirket eklendi.";
+    public static final String COMPANY_UPDATED = "Şirket güncellendi.";
+    public static final String COMPANY_DELETED = "Şirket silindi.";
+
     public static final String CUSTOMER_ADDED = "Müşteri eklendi.";
     public static final String CUSTOMER_UPDATED = "Müşteri güncellendi.";
     public static final String CUSTOMER_DELETED = "Müşteri silindi.";

@@ -24,7 +24,11 @@ public class OrderProduct {
     @Max(value = 100000000, message = "Ürün miktarı 100.000.000'dan büyük olamaz.")
     private int quantity;
 
-    @ManyToOne()
+
+    @Column(name = "package_type_count")
+    private int packageTypeCount;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private Order order;
 

@@ -117,7 +117,7 @@ public class ProductManager implements ProductService {
     @Override
     public DataResult<Boolean> isStockAvailable(Product product, int quantity) {
         Product productToCheck = this.getById(product.getId()).getData();
-        if(productToCheck.getUnitsInStock() - quantity <=0){
+        if(productToCheck.getUnitsInStock() - quantity <0){
             return new SuccessDataResult<>(false);
         }
         return new SuccessDataResult<>(true);

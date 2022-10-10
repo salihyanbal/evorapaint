@@ -34,4 +34,8 @@ public class Customer extends User{
     @OneToOne(mappedBy = "customer")
     @JsonIgnore
     private ShoppingCart shoppingCart;
+
+    @OneToOne(mappedBy = "customer")
+    @JsonIgnore
+    private Company company;
 }

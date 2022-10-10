@@ -29,15 +29,20 @@ public class Product {
     @Size(max = 50, message = "Ürün adı en fazla 50 harften oluşmalıdır.")
     private String name;
 
-    @Column(name = "weight")
-    @Min(value = 0, message = "Ürün ağırlığı 0'dan az olamaz.")
-    @Max(value = 100000, message = "Ürün ağırlığı 100.000'dan fazla olamaz.")
-    private int weight;
+    @Column(name = "gross_weight")
+    @Min(value = 0, message = "Ürün brüt ağırlığı 0'dan az olamaz.")
+    @Max(value = 100000000, message = "Ürün brüt ağırlığı 100.000.000'dan fazla olamaz.")
+    private int grossWeight;
+
+    @Column(name = "net_weight")
+    @Min(value = 0, message = "Ürün net ağırlığı 0'dan az olamaz.")
+    @Max(value = 100000000, message = "Ürün net ağırlığı 100.000.000'dan fazla olamaz.")
+    private int netWeight;
 
     @Column(name = "volume")
     @NotNull(message = "Hacim değeri boş bırakılamaz.")
     @Min(value = 0, message = "Ürün hacmi 0'dan küçük olamaz.")
-    @Max(value = 10000, message = "Ürün hacmi 10.000'den büyük olamaz.")
+    @Max(value = 100000000, message = "Ürün hacmi 100.000.000'den büyük olamaz.")
     private double volume;
 
     @Column(name = "unit_price")
@@ -49,7 +54,6 @@ public class Product {
     @Column(name = "units_in_stock")
     @NotNull(message = "Stoktaki ürün miktarı boş bırakılamaz.")
     @Min(value = 0, message = "Stoktaki ürün miktarı 0'dan küçük olamaz.")
-    @Max(value = 10000000, message = "Stoktaki ürün miktarı 10.000.000'dan büyük olamaz.")
     private int unitsInStock;
 
     @Column(name = "description")

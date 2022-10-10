@@ -34,6 +34,9 @@ public class Order {
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate estimatedDeliveryDate;
 
+    @Column(name = "is_belonging_to_company")
+    private boolean belongingToCompany;
+
     @ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -54,7 +57,7 @@ public class Order {
     @JsonIgnore
     private Shipment shipment;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<OrderProduct> orderProducts;
 

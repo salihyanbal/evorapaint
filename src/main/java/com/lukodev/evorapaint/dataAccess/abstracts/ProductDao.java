@@ -14,20 +14,20 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
     List<Product> getAllByCategoryId(int categoryId);
     List<Product> getAllByCategoryIdAndActiveTrue(int categoryId);
 
-    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.weight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
+    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.grossWeight, p.netWeight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
             "From Product p left join p.productImage pi")
     List<ProductWithImageDto> getAllWithImage();
 
-    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.weight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
+    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.grossWeight, p.netWeight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
             "From Product p left join p.productImage pi where p.active = true")
     List<ProductWithImageDto> getAllActiveWithImage();
 
-    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.weight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
+    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.grossWeight, p.netWeight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
             "From Product p left join p.productImage pi where p.active = true and p.category.id = :categoryId")
     List<ProductWithImageDto> getAllByCategoryIdAndActiveWithImage(int categoryId);
 
 
-    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.weight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
+    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.grossWeight, p.netWeight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
             "From OrderProduct op left join op.product p left join p.productImage pi where op.order.id = :orderId")
     List<ProductWithImageDto> getAllProductsWithImageByOrderId(int orderId);
 
@@ -37,7 +37,7 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
     @Query(nativeQuery=true, value="SELECT *  FROM products where active=true ORDER BY random() limit :amount")
     List<Product> getRandomActiveProducts(int amount);
 
-    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.weight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
+    @Query("Select new com.lukodev.evorapaint.entities.dtos.ProductWithImageDto(p.id, p.name, p.grossWeight, p.netWeight, p.volume, p.unitPrice, p.unitsInStock, p.description, p.active, p.category, pi.imageName) " +
             "From Product p left join p.productImage pi where p.id = :id")
     ProductWithImageDto getByIdWithImage(int id);
 

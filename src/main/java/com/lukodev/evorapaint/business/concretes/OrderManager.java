@@ -23,26 +23,34 @@ public class OrderManager implements OrderService{
     private OrderDao orderDao;
     private OrderProductService orderProductService;
     private CustomerService customerService;
+    private CompanyService companyService;
     private OrderStatusService orderStatusService;
     private AutomaticMailService automaticMailService;
     private ShipmentService shipmentService;
     private ShoppingCartItemService shoppingCartItemService;
+    private ShoppingCartService shoppingCartService;
     private int daysToEstimatedDeliveryDate = 10;
     @Autowired
-    public OrderManager(OrderDao orderDao, OrderProductService orderProductService, CustomerService customerService, OrderStatusService orderStatusService, AutomaticMailService automaticMailService, ShipmentService shipmentService, ShoppingCartItemService shoppingCartItemService) {
+    public OrderManager(OrderDao orderDao, OrderProductService orderProductService, CustomerService customerService, CompanyService companyService, OrderStatusService orderStatusService, AutomaticMailService automaticMailService, ShipmentService shipmentService, ShoppingCartItemService shoppingCartItemService, ShoppingCartService shoppingCartService) {
         this.orderDao = orderDao;
         this.orderProductService = orderProductService;
         this.customerService = customerService;
+        this.companyService = companyService;
         this.orderStatusService = orderStatusService;
         this.automaticMailService = automaticMailService;
         this.shipmentService = shipmentService;
         this.shoppingCartItemService = shoppingCartItemService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @Transactional
     @CacheEvict(value = "order.getAll",allEntries = true)
     @Override
     public Result add(Order order) {
+        DataResult<Boolean> customerHaveCompanyResult = this.checkCustomerHaveCompany(order.getCustomer());
+        if(!customerHaveCompanyResult.getData()){
+            return customerHaveCompanyResult;
+        }
         this.orderDao.save(order);
         sendOrderStatusMail(order);
         return new SuccessResult(Messages.ORDER_ADDED);
@@ -52,6 +60,10 @@ public class OrderManager implements OrderService{
     @CacheEvict(value = "order.getAll",allEntries = true)
     @Override
     public Result update(Order order) {
+        DataResult<Boolean> customerHaveCompanyResult = this.checkCustomerHaveCompany(order.getCustomer());
+        if(!customerHaveCompanyResult.getData()){
+            return customerHaveCompanyResult;
+        }
         this.orderDao.save(order);
         sendOrderStatusMail(order);
         return new SuccessResult(Messages.ORDER_UPDATED);
@@ -68,18 +80,18 @@ public class OrderManager implements OrderService{
     @Transactional
     @Override
     public Result shoppingCartToOrderByShoppingCartId(int shoppingCartId,
-                                                      ShipmentMethod shipmentMethod, Address address) {
+                                                      ShipmentMethod shipmentMethod, Address address, boolean belongingToCompany) {
         DataResult<List<ShoppingCartItem>> shoppingCartItemsResult = this.shoppingCartItemService.getAllByShoppingCartId(shoppingCartId);
         if(!shoppingCartItemsResult.isSuccess()){
             return new ErrorResult("Sipariş verilirken bi hata oluştu.");
         }
         Customer customer = shoppingCartItemsResult.getData().get(0).getShoppingCart().getCustomer();
-        Order order = this.createOrderByCustomer(customer, shipmentMethod, address);
+        Order order = this.createOrderByCustomer(customer, shipmentMethod, address, belongingToCompany);
         Result toOrderProductResult = this.shoppingCartItemsToOrderProducts(shoppingCartItemsResult.getData(), order);
         if(!toOrderProductResult.isSuccess()){
             return toOrderProductResult;
         }
-        this.shoppingCartItemService.deleteAll(shoppingCartItemsResult.getData());
+        this.shoppingCartService.deleteByCustomerId(customer.getId());
         return new SuccessResult("Sipariş oluşturuldu");
     }
 
@@ -90,6 +102,8 @@ public class OrderManager implements OrderService{
             OrderProduct orderProduct = new OrderProduct();
             orderProduct.setOrder(order);
             orderProduct.setProduct(shoppingCartItem.getProduct());
+            orderProduct.setPackageType(shoppingCartItem.getPackageType());
+            orderProduct.setPackageTypeCount(shoppingCartItem.getPackageTypeCount());
             orderProduct.setQuantity(shoppingCartItem.getQuantity());
             orderProducts.add(orderProduct);
         }
@@ -100,7 +114,7 @@ public class OrderManager implements OrderService{
         return new SuccessDataResult<>(orderProducts);
     }
 
-    private Order createOrderByCustomer(Customer customer, ShipmentMethod shipmentMethod, Address address){
+    private Order createOrderByCustomer(Customer customer, ShipmentMethod shipmentMethod, Address address, boolean belongingToCompany){
         OrderStatus orderStatus = new OrderStatus();
         orderStatus.setId(1);
         Order order = new Order();
@@ -110,6 +124,7 @@ public class OrderManager implements OrderService{
         order.setShipmentMethod(shipmentMethod);
         order.setAddress(address);
         order.setOrderStatus(orderStatus);
+        order.setBelongingToCompany(belongingToCompany);
         this.add(order);
         return order;
     }
@@ -143,5 +158,12 @@ public class OrderManager implements OrderService{
             return this.automaticMailService.sendOrderStatusMailWithShipment(order, customer, orderStatus, shipment);
         }
         return this.automaticMailService.sendOrderStatusMail(order, customer, orderStatus);
+    }
+
+    private DataResult<Boolean> checkCustomerHaveCompany(Customer customer){
+        if(!this.companyService.existByCustomerId(customer.getId()).getData()){
+            return new ErrorDataResult<>(false,"Müşteriye ait bi şirket bulunamadı");
+        }
+        return new SuccessDataResult<>(true);
     }
 }

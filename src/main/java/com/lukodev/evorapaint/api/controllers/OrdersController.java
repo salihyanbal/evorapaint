@@ -43,7 +43,7 @@ public class OrdersController {
     @PostMapping("/shoppingcarttoorderbyshoppingcartid")
     public ResponseEntity<?> shoppingCartToOrderByShoppingCartId(@RequestBody ShoppingCartToOrderDto shoppingCartToOrderDto){
         return ResponseEntity.ok(this.orderService.shoppingCartToOrderByShoppingCartId(shoppingCartToOrderDto.getShoppingCartId(),
-                shoppingCartToOrderDto.getShipmentMethod(), shoppingCartToOrderDto.getAddress()));
+                shoppingCartToOrderDto.getShipmentMethod(), shoppingCartToOrderDto.getAddress(),shoppingCartToOrderDto.isBelongingToCompany()));
     }
 
     @GetMapping("/getall")

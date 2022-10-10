@@ -37,4 +37,8 @@ public class ShipmentType {
     @OneToMany(mappedBy = "shipmentType")
     @JsonIgnore
     private List<PackageType> packageTypes;
+
+    @OneToMany(mappedBy = "shipmentType")
+    @JsonIgnore
+    private List<ShoppingCart> shoppingCarts;
 }
